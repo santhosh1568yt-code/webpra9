@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Practicum 9 - CSS Animation</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    overflow-x: hidden;
+  }
+
+  /* the heading that moves */
+  .animated {
+    color: purple;
+    position: relative;
+    animation-name: slide;
+    animation-duration: 3s;
+    animation-timing-function: linear;
+    animation-iteration-count: 3;
+  }
+
+  /* starts off screen on the right, slides to the left */
+  @keyframes slide {
+    from {
+      left: 100%;
+      transform: translateX(0);
+    }
+    to {
+      left: -100%;
+    }
+  }
+
+  .info {
+    margin-top: 30px;
+  }
+
+  ul li {
+    margin-bottom: 5px;
+  }
+</style>
+</head>
+<body>
+
+<h1 class="animated">Watch me move</h1>
+
+<p>This example shows how to use CSS animations to make h1 elements move across the page.</p>
+<p>In addition, we output some text each time an animation event fires, so you can see them in action.</p>
+
+<ul id="output"></ul>
+
+<script>
+  var h1 = document.querySelector(".animated");
+  var out = document.getElementById("output");
+
+  function addLine(text) {
+    var li = document.createElement("li");
+    li.textContent = text;
+    out.appendChild(li);
+  }
+
+  h1.addEventListener("animationstart", function (e) {
+    addLine("Started: elapsed time is " + e.elapsedTime);
+  });
+
+  h1.addEventListener("animationiteration", function (e) {
+    addLine("New loop started at time " + e.elapsedTime);
+  });
+
+  h1.addEventListener("animationend", function (e) {
+    addLine("Ended: elapsed time is " + e.elapsedTime);
+  });
+</script>
+
+</body>
+</html>
